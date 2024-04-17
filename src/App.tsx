@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import PlayerPage from "./components/PlayerPage";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
+import ShowIndividualPlayer from "./components/IndividualFootballer";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/players" element={<PlayerPage />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/players/:id" element={<ShowIndividualPlayer />} />
         </Routes>
       </Router>
     </main>
