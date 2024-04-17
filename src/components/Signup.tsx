@@ -8,7 +8,7 @@ export default function Signup() {
     email: "",
     username: "",
     password: "",
-    // passwordConfirmation: "" 
+    passwordConfirmation: "" 
   })
 
   function handleChange(e: any) {
@@ -71,7 +71,7 @@ export default function Signup() {
             />
           </div>
         </div>
-        {/* <div className="field">
+        <div className="field">
           <label className="label">Confirm password</label>
           <div className="control">
             <input
@@ -82,7 +82,7 @@ export default function Signup() {
               value={formData.passwordConfirmation}
             />
           </div>
-        </div> */}
+        </div>
         <button className="button">Submit</button>
       </form>
     </div>

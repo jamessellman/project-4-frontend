@@ -1,4 +1,4 @@
-import React from "react"
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Navbar from "./components/navbar";
@@ -9,47 +9,45 @@ import SignUp from "./components/Signup";
 import ShowIndividualPlayer from "./components/IndividualFootballer";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import CreateFootballer from "./components/Create";
+import EditFootballer from "./components/Edit";
 
 function App() {
-//  const [user, setUser] = useState(null);
-//   //WE PUT THIS OUTSIDE OF THE USE EFFECT SO ITS GLOBAL BUT CALL INSIDE THE USE EFFECT
-//   async function fetchUser() {
-//     //getting the token from local storing
-//     const token = localStorage.getItem("token");
-//     //getting that user from the backend by using the information on the token
-//     const resp = await axios.get("/api/signup", {
-//       headers: { Authorization: `Bearer ${token}` },
-//     });
-//     //then using use state to set that stored user inside of the the user variable
-//     setUser(resp.data);
-//   }
+  const [user, setUser] = useState(null);
 
-//   useEffect(() => {
-//     //creating a function to create user
+  async function fetchUser() {
+    const token = localStorage.getItem("token");
+    const resp = await axios.get("/api/signup", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    console.log(token);
+    setUser(resp.data);
+  }
+  
+  console.log( user);
+ 
 
-//     //getting the token again. have to do this as the previous taken is only within the function aboves scope
-//     const token = localStorage.getItem("token");
-//     //if there is a user then run the fetchUser function. can run this function is there is no user
-//     if (token) fetchUser();
-//   }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) fetchUser();
+  }, []);
 
-
-
-
-    return (
+  return (
     <main>
       <Router>
-        <Navbar />
+        <Navbar user={user} setUser={setUser}/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/players" element={<PlayerPage />} />
-          <Route path="/login" element={<Login/>} />
+          <Route path="/login" element={<Login fetchUser={fetchUser}/>} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/players/:id" element={<ShowIndividualPlayer />} />
+          <Route path="/create" element={<CreateFootballer />} />
+          <Route path="/edit/:id" element={<EditFootballer />} />
         </Routes>
       </Router>
     </main>
   );
 }
 
-export default App
+export default App;

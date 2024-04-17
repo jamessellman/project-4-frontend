@@ -3,7 +3,7 @@ import axios from "axios";
 // ! This will navigate the page when the user logs in
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ fetchUser }: { fetchUser: Function }) {
   // ! navigate is a function to call to take the user to another page.
   const navigate = useNavigate();
 
@@ -31,7 +31,7 @@ export default function Login() {
     console.log(resp.data);
     // ! resp.data always contains the data in an axios request.
     //we need to fetch the user inside here to fix the bug of when you log in it should automatically show you the routes available to you
-    // fetchUser();
+    fetchUser();
     navigate("/");
   }
 
