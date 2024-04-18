@@ -3,10 +3,14 @@
 import React, { SyntheticEvent } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { IComment } from "../interfaces/commentinterface";
+
+// type Comments = null | IComment;
 
 function ShowIndividualPlayer() {
   const { id } = useParams();
   const [player, setplayer] = React.useState<any>(null);
+  const [comment, setComment] = React.useState<any>(null);
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -16,8 +20,16 @@ function ShowIndividualPlayer() {
       setplayer(playerData);
       console.log(playerData);
     }
+    async function fetchComments() {
+      const resp = await fetch(`http://127.0.0.1:4000/api/comments/${id}`);
+      const commentData = await resp.json();
+      setComment(commentData);
+      console.log(commentData);
+    }
     fetchPlayer();
+    fetchComments();
   }, [id]);
+
   if (!player) {
     return <p>Character Loading...</p>;
   }
@@ -57,7 +69,7 @@ function ShowIndividualPlayer() {
           Career Appearances: {player.career_appearances}
         </p>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Career Goals{player.career_goals}
+          Career Goals: {player.career_goals}
         </p>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
           Foot: {player.foot}
@@ -78,6 +90,22 @@ function ShowIndividualPlayer() {
           className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
           Delete
         </button>
+      </div>
+      <div className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+          Comment Section:
+        </h5>
+        <div>
+          {comment?.map((comment: any, id: any) => (
+            <div
+              key={id}
+              className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+              <p>{comment.content}</p>
+              <p>{comment.created_at}</p>
+              <p>(comment.user_id)</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

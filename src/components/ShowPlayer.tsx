@@ -1,5 +1,4 @@
 // this component will be for cards that render on the list page. There will be multiple cards
-import React from "react";
 import { Link } from "react-router-dom";
 
 function ShowPlayer({ id, name, image, club }: any) {

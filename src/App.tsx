@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import CreateFootballer from "./components/Create";
 import EditFootballer from "./components/Edit";
+import FiveASide from "./components/FiveASide";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -44,6 +45,7 @@ function App() {
           <Route path="/players/:id" element={<ShowIndividualPlayer />} />
           <Route path="/create" element={<CreateFootballer />} />
           <Route path="/edit/:id" element={<EditFootballer />} />
+          <Route path="/fiveaside" element={<FiveASide />} />
         </Routes>
       </Router>
     </main>
