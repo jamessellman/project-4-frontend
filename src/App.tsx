@@ -14,7 +14,10 @@ import EditFootballer from "./components/Edit";
 import FiveASide from "./components/FiveASide";
 
 function App() {
+ 
+
   const [user, setUser] = useState(null);
+
 
   async function fetchUser() {
     const token = localStorage.getItem("token");

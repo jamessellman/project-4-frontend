@@ -30,6 +30,7 @@ function PlayerPage() {
               image={footballer.image}
               club={footballer.club}
               id={footballer.id}
+              imageSize="h-40 w-40"
             />
           );
         })}
