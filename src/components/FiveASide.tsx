@@ -1,5 +1,6 @@
 import React from "react";
 import PlayerCard from "./FiveASideCard";
+import { baseUrl } from "../config";
 
 function FiveASide() {
   const [team, setTeam] = React.useState<any>([]);
@@ -15,7 +16,7 @@ function FiveASide() {
   async function fetchPlayer() {
     const randomNumber = getRandomPlayerId();
     const resp = await fetch(
-      `http://127.0.0.1:4000/api/players/${randomNumber}`
+      `${baseUrl}/players/${randomNumber}`
     );
     const playerData = await resp.json();
     setPlayer(playerData);

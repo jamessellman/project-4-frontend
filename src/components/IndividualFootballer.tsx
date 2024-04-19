@@ -4,6 +4,7 @@ import React, { SyntheticEvent } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IComment } from "../interfaces/commentinterface";
+import { baseUrl } from "../config";
 
 // type Comments = null | IComment;
 
@@ -15,13 +16,13 @@ function ShowIndividualPlayer() {
 
   React.useEffect(() => {
     async function fetchPlayer() {
-      const resp = await fetch(`http://127.0.0.1:4000/api/players/${id}`);
+      const resp = await fetch(`${baseUrl}/players/${id}`);
       const playerData = await resp.json();
       setplayer(playerData);
       console.log(playerData);
     }
     async function fetchComments() {
-      const resp = await fetch(`http://127.0.0.1:4000/api/comments/${id}`);
+      const resp = await fetch(`${baseUrl}/comments/${id}`);
       const commentData = await resp.json();
       setComment(commentData);
       console.log(commentData);
@@ -37,7 +38,7 @@ function ShowIndividualPlayer() {
   async function deleteProduct(e: SyntheticEvent) {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://127.0.0.1:4000/api/players/${id}`, {
+      await axios.delete(`${baseUrl}/players/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate("/players");

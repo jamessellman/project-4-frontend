@@ -1,6 +1,7 @@
 import React, { SyntheticEvent, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { baseUrl } from "../config";
 
 
 function EditFootballer() {
@@ -22,7 +23,7 @@ function EditFootballer() {
 
 React.useEffect(() => {
     async function fetchProducts() {
-      const resp = await fetch(`http://127.0.0.1:4000/api/players/${id}`);
+      const resp = await fetch(`${baseUrl}/players/${id}`);
       const playerData = await resp.json();
       setFormData(playerData);
     }
@@ -39,7 +40,7 @@ React.useEffect(() => {
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const resp = await axios.post(`/api/players`, formData, {
+    const resp = await axios.post(`${baseUrl}/players`, formData, {
       headers: { Authorization: `Bearer ${token}` },
     });
     navigate("/players");

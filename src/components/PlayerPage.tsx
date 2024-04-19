@@ -1,5 +1,6 @@
 import React from "react";
 import ShowPlayer from "./ShowPlayer";
+import { baseUrl } from "../config";
 
 function PlayerPage() {
   React.useEffect(() => {
@@ -10,7 +11,7 @@ function PlayerPage() {
 
   React.useEffect(() => {
     async function fetchFootballers() {
-      const resp = await fetch("http://127.0.0.1:4000/api/players");
+      const resp = await fetch(`${baseUrl}/players`);
       const playerData = await resp.json();
       console.log(playerData);
       setFootballer(playerData);

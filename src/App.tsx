@@ -12,6 +12,7 @@ import axios from "axios";
 import CreateFootballer from "./components/Create";
 import EditFootballer from "./components/Edit";
 import FiveASide from "./components/FiveASide";
+import { baseUrl } from "./config";
 
 function App() {
  
@@ -21,7 +22,7 @@ function App() {
 
   async function fetchUser() {
     const token = localStorage.getItem("token");
-    const resp = await axios.get("/api/signup", {
+    const resp = await axios.get(`${baseUrl}/signup`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     console.log(token);

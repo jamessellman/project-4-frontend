@@ -1,10 +1,11 @@
 import { SyntheticEvent, useState } from "react"
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../config";
 
 export default function Signup() {
-    const navigate = useNavigate();
- const [formData, setFormData] = useState({
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
     email: "",
     username: "",
     password: "",
@@ -26,7 +27,7 @@ export default function Signup() {
     e.preventDefault() // prevent the page from refreshing
 
     // ! We're going to use axios to post instead of fetch, just because its a bit nicer.
-    const resp = await axios.post('/api/signup', formData)
+    const resp = await axios.post(`${baseUrl}/signup`, formData)
     console.log(resp.data) // ! resp.data always contains the data in an axios request.
     navigate("/login");
   }

@@ -1,6 +1,7 @@
 import { SyntheticEvent, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../config";
 
 function CreateFootballer() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function CreateFootballer() {
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const resp = await axios.post(`/api/players`, formData, {
+    const resp = await axios.post(`${baseUrl}/players`, formData, {
       headers: { Authorization: `Bearer ${token}` },
     });
     navigate("/players");
