@@ -22,25 +22,27 @@ function EditFootballer() {
   });
 
 React.useEffect(() => {
-    async function fetchProducts() {
+    async function fetchPlayer() {
       const resp = await fetch(`${baseUrl}/players/${id}`);
       const playerData = await resp.json();
       setFormData(playerData);
     }
-    fetchProducts();
+    fetchPlayer();
   }, []);
 
 
   function handleChange(e: any) {
-    const fieldName = e.target.name;
-    const newFormData = structuredClone(formData);
-    newFormData[fieldName as keyof typeof formData] = e.target.value;
+    const fieldName = e.currentTarget.name;
+    const newFormData: any = structuredClone(formData);
+    if (newFormData)
+      newFormData[fieldName as keyof typeof formData] = e.target.value;
     setFormData(newFormData);
   }
+
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const resp = await axios.post(`${baseUrl}/players`, formData, {
+    const resp = await axios.post(`${baseUrl}/players/${id}`, formData, {
       headers: { Authorization: `Bearer ${token}` },
     });
     navigate("/players");

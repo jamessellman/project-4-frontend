@@ -24,8 +24,9 @@ function App() {
     const token = localStorage.getItem("token");
     const resp = await axios.get(`${baseUrl}/signup`, {
       headers: { Authorization: `Bearer ${token}` },
+      
     });
-    console.log(token);
+    console.log(token)
     setUser(resp.data);
   }
   

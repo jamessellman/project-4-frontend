@@ -25,14 +25,14 @@ function ShowIndividualPlayer() {
       const resp = await fetch(`${baseUrl}/comments/${id}`);
       const commentData = await resp.json();
       setComment(commentData);
-      console.log(commentData);
+      console.log("commentdata", commentData);
     }
     fetchPlayer();
     fetchComments();
   }, [id]);
 
   if (!player) {
-    return <p>Character Loading...</p>;
+    return <p>Player Loading...</p>;
   }
 
   async function deleteProduct(e: SyntheticEvent) {
@@ -58,7 +58,7 @@ function ShowIndividualPlayer() {
           {player.name}
         </h5>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          Team: {player.team}
+          Team: {player.club}
         </p>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
           Position: {player.position}
@@ -103,12 +103,16 @@ function ShowIndividualPlayer() {
               className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               <p>{comment.content}</p>
               <p>{comment.created_at}</p>
-              <p>(comment.user_id)</p>
+              <p>{comment.user_id}</p>
+              {comment?.user_id && 
+              <p>{comment.user_comments.username}</p>
+              }
             </div>
           ))}
         </div>
       </div>
     </div>
+    
   );
 }
 

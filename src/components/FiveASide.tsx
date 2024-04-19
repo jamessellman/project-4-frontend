@@ -81,7 +81,7 @@ function FiveASide() {
               key={player.id}
               name={player.name}
               image={player.image}
-              team={player.team}
+              club={player.club}
             />
           );
         })}
