@@ -44,7 +44,7 @@ function Home() {
 
   return (
     <div className="max-w-[1000px] h-[680px] w-full m-auto py-16 px-4 relative group">
-      <h1 className="mb-5 ">5 A Side API</h1>
+      <h1 className="text-4xl font-bold text-gray-900 mb-4">5-A-Side-API</h1>
       <div
         style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
         className="w-full h-full rounded-2xl bg-center bg-cover duration-500"></div>
