@@ -12,7 +12,20 @@ export default function Signup() {
     passwordConfirmation: "",
   });
 
+    const [errorData, setErrorData] = useState({
+    email: "",
+    userName: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   function handleChange(e: any) {
+     setErrorData({
+      email: "",
+      userName: "",
+      password: "",
+      confirmPassword: "",
+    });
     const fieldName = e.target.name;
     const newFormData = structuredClone(formData);
     newFormData[fieldName as keyof typeof formData] = e.target.value;
@@ -20,10 +33,15 @@ export default function Signup() {
   }
 
   async function handleSubmit(e: SyntheticEvent) {
+    try {
     e.preventDefault();
     const resp = await axios.post(`${baseUrl}/signup`, formData);
     console.log(resp.data);
     navigate("/login");
+  } catch (e: any) {
+      setErrorData(e.response.data.errors);
+      console.log(errorData);
+    }
   }
 
   console.log(formData);

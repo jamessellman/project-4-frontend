@@ -42,7 +42,7 @@ React.useEffect(() => {
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const resp = await axios.post(`${baseUrl}/players/${id}`, formData, {
+    const resp = await axios.put(`${baseUrl}/players/${id}`, formData, {
       headers: { Authorization: `Bearer ${token}` },
     });
     navigate("/players");

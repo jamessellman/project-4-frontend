@@ -47,7 +47,7 @@ function App() {
           <Route path="/players" element={<PlayerPage />} />
           <Route path="/login" element={<Login fetchUser={fetchUser}/>} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/players/:id" element={<ShowIndividualPlayer />} />
+          <Route path="/players/:id" element={<ShowIndividualPlayer user={user} setUser={setUser} />} />
           <Route path="/create" element={<CreateFootballer />} />
           <Route path="/edit/:id" element={<EditFootballer />} />
           <Route path="/fiveaside" element={<FiveASide />} />

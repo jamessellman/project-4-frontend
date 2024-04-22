@@ -36,7 +36,7 @@ function CreateFootballer() {
   return (
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
       <div className="mb-5">
-        <h1>Add a player</h1>
+        <h2 className="text-3xl mb-8 text-center mt-8">Add a player</h2>
         <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-black">
           Player Name:
         </label>
