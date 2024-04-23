@@ -13,6 +13,7 @@ import CreateFootballer from "./components/Create";
 import EditFootballer from "./components/Edit";
 import FiveASide from "./components/FiveASide";
 import { baseUrl } from "./config";
+import Random from "./components/randomchoice";
 
 function App() {
  
@@ -51,6 +52,7 @@ function App() {
           <Route path="/create" element={<CreateFootballer />} />
           <Route path="/edit/:id" element={<EditFootballer />} />
           <Route path="/fiveaside" element={<FiveASide />} />
+          <Route path="/chooseplayer" element={<Random />} />
         </Routes>
       </Router>
     </main>

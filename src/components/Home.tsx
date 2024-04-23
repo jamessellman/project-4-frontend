@@ -42,7 +42,7 @@ function Home() {
   return (
     <section>
       <div className="max-w-[1000px] h-[580px] w-full m-auto py-5 px-4 relative group">
-        <h1 className="text-5xl md:text-4xl font-extrabold text-center text-gray-900 dark:text-BLACK mb-4">
+        <h1 className="text-5xl md:text-4xl font-extrabold text-center text-gray-900 dark:text-BLACK mb-8 mt-5">
   Welcome to 5-A-Side-API
 </h1>
         <div
