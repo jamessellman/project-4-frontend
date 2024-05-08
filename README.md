@@ -4,6 +4,8 @@
 
 5-A-Side Football API is a website in which users can visit to add, edit and discuss current Premier League football players. Users have the ability to build their own dream 5-A-side football teams as well as play a game to choose their favourite between randomised players from the database.
 
+![alt text](<Screenshot 2024-05-08 at 11.27.08.png>)
+
 # Deployed Version
 
 https://fiveasidedatabase.netlify.app/
@@ -72,11 +74,13 @@ Once my idea was in place, I began planning. I started by deciding what each pag
 
 Furthermore, I needed to structure my model and figure out how they would interact with one another. I did this using Quick DBD.
 
+![alt text](<Screenshot 2024-05-08 at 11.25.11.png>)
+
 ## Backend (Day 2, 3 ,4 & 8)
 
 This was my first time creating a backend using Python, and with plenty of time before my deadline, I decided to take a slow, meticulous approach to ensure I fully understood how the components/functions were interacting with each other to the best of my ability.
 
-I ensured I had my environment set up and installed any required dependencies. Firstly, I created a base model, user model (which included password hashing), footballer model, and finally a comment model, and defined the relationships between the models. Subsequently, I created a seeding file, which included a footballer, a comment on that footballer, and a user to initially push to the database.
+I ensured I had my environment set up and installed any required dependencies. Firstly, I created a base model (which contained functions to save and remove data from the DB. This was added to make code for concise), user model (which included password hashing), footballer model, and finally a comment model, and defined the relationships between the models. Subsequently, I created a seeding file, which included a footballer, a comment on that footballer, and a user to initially push to the database.
 
 Next, I focused on creating three serializers, one for each of the footballer, user, and comment so the data could be converted from JSON and read by Python in the backend. I manually created my database in PostgreSQL and seeded my initial data, which could be viewed in TablePlus.
 
@@ -85,6 +89,9 @@ My next focus was on the controllers, where the endpoints for the frontend are d
 Certain features such as adding a player were only allowed to happen if a user had signed in, so a secure route decorator was created to check if a user had a valid token and therefore was able to conduct certain actions on the site. The token also contained information about the user that was logged in, such as their ID in the database. This decorator was added to a few of the functions on the player controller.
 
 Finally, on the controllers, I wanted permissions; essentially, only the user who added a player can edit or delete that player. Now users can have two tokens when logged in that contain their user ID. I circumnavigated back to the player controller; I could add a comparison operator to functions to check if the user attempting to edit a player, for example, is the user that owns that player and give permission to do so, otherwise, send an error message back. Finally, in the backend, I wanted a super admin to have access to amend any player in the database. I decided that the user with the ID of 1 would be the admin user. I amended the comparison operator on the player controllers with the OR comparator so either user admin 1 or the user who created the player has permission to amend.
+
+- code snippet for function that can delete a player, including permissions for admin user and user that posted the player.
+  ![alt text](<Screenshot 2024-05-08 at 14.30.10.png>)
 
 ## Frontend (days 5, 6, 7, 8, 9. 10, 11, 12)
 
@@ -104,10 +111,50 @@ Finally, using the same logic to get a random player from the backend, I display
 
 Finally, with all the functionality completed within the timeframe, I focused on styling my site using Tailwind CSS, keeping the design clean and consistent. On the homepage, I hardcoded 5 pictures from the internet into an array. I created a carousel on the homepage in React.js which would map through the array and display the images. The user can click on the left and right chevron to scroll through the pictures on the homepage.
 
+# Final Product Screenshot Walktrough
+
+## Homepage:
+
+![alt text](<Screenshot 2024-05-08 at 11.27.08.png>)
+
+## Player list page:
+
+![alt text](<Screenshot 2024-05-08 at 13.08.01.png>)
+
+## Individual player page:
+
+![alt text](<Screenshot 2024-05-08 at 14.28.46.png>)
+
+## Sign up page:
+
+![alt text](<Screenshot 2024-05-08 at 13.12.18.png>)
+
+## Login Page:
+
+![alt text](<Screenshot 2024-05-08 at 13.12.10.png>)
+
+## Create a player page:
+
+![alt text](<Screenshot 2024-05-08 at 13.11.51.png>)
+
+## 5-a-side page:
+
+![alt text](<Screenshot 2024-05-08 at 13.10.51.png>)
+
+## Favourite player game:
+
+![alt text](<Screenshot 2024-05-08 at 13.11.15.png>)
+
 # Key Learnings/Takeaways
 
 - My confidence in frontend development grew significantly. I gained a much more comprehensive understanding of React and how routers work, as well as how to link components to keep the code tidy and display further information on a single page.
 - It was my first time styling with Tailwind CSS. It presented a steep learning curve, but I now have a much better understanding of its use, flexibility, and implementation.
+- This project also helped me greatly with my understanding of relational databases and how they can be used effectively to pool data from different tables.
+
+# Challenges
+
+- Post deployment, I had an error regarding my posting, editing and deleting a player as they no longer worked. I worked backwards through my code, using console logs to determine where the error was. I found an issue with my secure route, not correcting giving the user a token and therefore permission were not working correctly.
+- As previously mentioned, this was my first time using tailwind and decided to implement the first day of the project. It was certainly a challenge to learn tailwind as quickly as I could to ensure the project was styled well before the deadline.
 
 # Bugs
 
@@ -117,10 +164,10 @@ Finally, with all the functionality completed within the timeframe, I focused on
 
 # Future Improvements
 
-- Can’t yet delete comments
-- User cannot edit their own comment
-- Users 5 a side team is created in front end, i would like to this to persist in the backend and create a model for it
-- Further styling tweaks
-- Display errors for user. Ie when logging in if password is incorrect
-- Make random player code more dry.
-- Further search functionality, such as filter by position/team.
+- Unable to currently delete or delete comments.
+- User's 5-a-side team is created in the frontend; I would like this to persist in the backend and will need to create a new model,
+- Further styling tweaks.
+- Display errors for users, i.e., when logging in if the password is incorrect.
+- Ability for users to change their password.
+- Make random player code more DRY (Don't Repeat Yourself).
+- Further search functionality, such as filtering by position/team.
