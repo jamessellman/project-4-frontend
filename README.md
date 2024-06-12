@@ -45,7 +45,7 @@ Back-end
 
 - Flask.py
 - SQLaclamcy
-- PostgressSQL
+- PostgreSQL
 - Insomnia
 - Table plus
 

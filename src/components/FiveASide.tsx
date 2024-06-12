@@ -7,12 +7,13 @@ function FiveASide() {
   const [player, setPlayer] = React.useState<any>(null);
   const [keepEnabled, setKeepEnabled] = React.useState(true);
 
+  // function to create a random number
   function getRandomPlayerId() {
     const randomNumber = Math.floor(Math.random() * 14) + 1;
-    console.log(randomNumber);
     return randomNumber;
   }
 
+  // function to fetch player based on random number generated
   async function fetchPlayer() {
     const randomNumber = getRandomPlayerId();
     const resp = await fetch(`${baseUrl}/players/${randomNumber}`);
@@ -20,6 +21,7 @@ function FiveASide() {
     setPlayer(playerData);
     setKeepEnabled(true);
   }
+  // push a player into team
   function addPlayerToTeam() {
     if (team.length < 5) {
       const teamClone = structuredClone(team);
@@ -29,6 +31,7 @@ function FiveASide() {
       fetchPlayer();
     }
   }
+  // fetch a random player on load of page
   React.useEffect(() => {
     fetchPlayer();
   }, []);
@@ -45,7 +48,6 @@ function FiveASide() {
             alt={player && player.name}
           />
         </div>
-
         <div className="p-5">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {player && player.name}
@@ -75,7 +77,6 @@ function FiveASide() {
   {team?.map((player: any) => {
     return (
       <div key={player.id} className="w-40 m-5">
-        {/* Adjust the width and margin to your preference */}
         <PlayerCard
           name={player.name}
           image={player.image}

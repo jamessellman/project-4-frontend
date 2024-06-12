@@ -50,63 +50,45 @@ function PlayerPage() {
     { label: "West Ham United", value: "West Ham United" },
     { label: "Wolverhampton Wanderers", value: "Wolverhampton Wanderers" },
   ];
-function filterPlayers() {
-  if (!footballer) {
-    return []; // Return an empty array if footballer is undefined
-  }
+  function filterPlayers() {
+    if (!footballer) {
+      return []; // Return an empty array if footballer is undefined
+    }
 
-  return footballer.filter((player: any) => {
-    return (
-      (search === "" ||
-        player.name?.toLowerCase().includes(search.toLowerCase())) 
-      //   &&
-      // (value === "" || player[0].team?.includes(value))
-    );
-  });
-}
+    // filter for searchbar, to find player matching typed input
+    return footballer.filter((player: any) => {
+      return (
+        search === "" ||
+        player.name?.toLowerCase().includes(search.toLowerCase())
+      );
+    });
+  }
   return (
     <section>
-    <div>
-      <h1 className="text-3xl mb-8 text-center mt-8">PlayerPage</h1>
-      <form className="max-w-md mx-auto">
-  <input
-    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 dark:bg-gray-800 text-white "
-    placeholder="Search Player"
-    type="text"
-    onChange={handleSearchBarChange}
-    id="searchBar"
-    name="searchBar"
-  />
-</form>
-      {/* <div className="select ">
-        <label className="">
-          <select
-            value={value}
-            onChange={handleDropdownChange}
-            className="">
-            {dropdownTeamOptions.map((option: any) => {
-              return (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              );
-            })}
-          </select>
-        </label>
-      </div> */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 ml-10 ">
-        {filterPlayers()?.map((footballer: any) => {
-          return <ShowPlayer key={footballer.id} {...footballer} />;
-        })}
+      <div>
+        <h1 className="text-3xl mb-8 text-center mt-8">PlayerPage</h1>
+        <form className="max-w-md mx-auto">
+          <input
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 dark:bg-gray-800 text-white "
+            placeholder="Search Player"
+            type="text"
+            onChange={handleSearchBarChange}
+            id="searchBar"
+            name="searchBar"
+          />
+        </form>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 ml-10 ">
+          {filterPlayers()?.map((footballer: any) => {
+            return <ShowPlayer key={footballer.id} {...footballer} />;
+          })}
+        </div>
       </div>
-    </div>
-    <footer className=" bottom-0 left-0 w-full bg-white shadow dark:bg-gray-800 mt-5">
+      {/* footer */}
+      <footer className=" bottom-0 left-0 w-full bg-white shadow dark:bg-gray-800 mt-5">
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2024.{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
-              
-            </a>
+            <a href="https://flowbite.com/" className="hover:underline"></a>
             All Rights Reserved.
           </span>
           <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
@@ -133,7 +115,7 @@ function filterPlayers() {
           </ul>
         </div>
       </footer>
-      </section>
+    </section>
   );
 }
 

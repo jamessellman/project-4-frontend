@@ -4,7 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../config";
 
 function CreateFootballer() {
+  
   const navigate = useNavigate();
+
+  // Use states to set form data inputted by user
   const [formData, setFormData] = useState({
     name: "",
     position: "",
@@ -17,13 +20,14 @@ function CreateFootballer() {
     bio: "",
     image: "",
   });
-
+// record text in type field
   function handleChange(e: any) {
     const fieldName = e.target.name;
     const newFormData = structuredClone(formData);
     newFormData[fieldName as keyof typeof formData] = e.target.value;
     setFormData(newFormData);
   }
+  // function to submit player
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -34,6 +38,7 @@ function CreateFootballer() {
   }
 
   return (
+    // submit form
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
       <div className="mb-5">
         <h2 className="text-3xl mb-8 text-center mt-8">Add a player</h2>
@@ -83,7 +88,6 @@ function CreateFootballer() {
         <input
           type="text"
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light"
-          // required
           onChange={handleChange}
           name={'club'}
           value={formData.club}

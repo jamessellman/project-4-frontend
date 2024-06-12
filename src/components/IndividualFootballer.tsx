@@ -3,10 +3,11 @@
 import React, { SyntheticEvent } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { IComment } from "../interfaces/commentinterface";
 import { baseUrl } from "../config";
 
 function ShowIndividualPlayer({ user, setUser }: any) {
+
+  // Use states to set data from backend into variables
   const { id } = useParams();
   const [player, setplayer] = React.useState<any>(null);
   const [comment, setComment] = React.useState<any>(null);
@@ -15,6 +16,8 @@ function ShowIndividualPlayer({ user, setUser }: any) {
   });
   const navigate = useNavigate();
 
+
+  // fetch player data from backend
   React.useEffect(() => {
     async function fetchPlayer() {
       const resp = await fetch(`${baseUrl}/players/${id}`);
@@ -22,6 +25,7 @@ function ShowIndividualPlayer({ user, setUser }: any) {
       setplayer(playerData);
       console.log(playerData);
     }
+    // fetch comment data from backend
     async function fetchComments() {
       const resp = await fetch(`${baseUrl}/comments/${id}`);
       const commentData = await resp.json();
@@ -32,6 +36,7 @@ function ShowIndividualPlayer({ user, setUser }: any) {
     fetchComments();
   }, [id]);
 
+  // record comments text in typed field
   function handleCommentChange(e: any) {
     const fieldName = e.currentTarget.name;
     const newCommentData: any = structuredClone(commentData);
@@ -41,6 +46,7 @@ function ShowIndividualPlayer({ user, setUser }: any) {
   }
   console.log(commentData);
 
+  // submit a comment to backend
   async function handleCommentSubmit(e: SyntheticEvent) {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -58,6 +64,7 @@ function ShowIndividualPlayer({ user, setUser }: any) {
     return <p>Player Loading...</p>;
   }
 
+  // function to detelete a comment if authorised
   async function deleteProduct(e: SyntheticEvent) {
     try {
       const token = localStorage.getItem("token");
@@ -66,11 +73,11 @@ function ShowIndividualPlayer({ user, setUser }: any) {
       });
       navigate("/players");
     } catch (e: any) {
-      // console.log(e.response.data);
     }
   }
 
   return (
+    // player card
     <section className="flex justify-center">
       <div className="max-w-4xl bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-5">
         <div className="w-4/5 md:max-w-6xl bg-white  rounded-lg shadow md:flex md:flex-row  dark:border-gray-700 dark:bg-gray-800">
@@ -107,6 +114,7 @@ function ShowIndividualPlayer({ user, setUser }: any) {
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               <span className="max-w-xm">Bio: {player.bio}</span>
             </p>
+            {/* buttons for editing and deleting a player */}
             <div className="flex mt-auto ">
               {user && (
                 <Link to={`/edit/${id}`}>
@@ -125,7 +133,8 @@ function ShowIndividualPlayer({ user, setUser }: any) {
             </div>
           </div>
         </div>
-        <div className="w-full   p-6 mt-4 bg-white rounded-lg shadow  dark:bg-gray-800  mt-5">
+        {/* comment section */}
+        <div className="w-full   p-6 mt-4 bg-white rounded-lg shadow  dark:bg-gray-800 ">
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             Comment Section:
           </h5>
@@ -153,6 +162,7 @@ function ShowIndividualPlayer({ user, setUser }: any) {
                 Submit
               </button>
             </form>
+            {/* display comments */}
             {comment?.map((comment: any, id: any) => (
               <div
                 key={id}

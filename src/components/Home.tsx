@@ -1,11 +1,10 @@
-// import React from "react";
-// import { baseUrl } from "../config";
 import { BsChevronCompactLeft, BsChevronCompactRight } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 
 import { useState } from "react";
 
 function Home() {
+  // array of object containting picture for carosel.
   const slides = [
     {
       url: "https://assets.publishing.service.gov.uk/government/uploads/system/uploads/image_data/file/176455/s960_Football_gov.uk.jpg",
@@ -23,6 +22,7 @@ function Home() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // functions to navigate slides
   const prevSlide = () => {
     const isFirstSlide = currentIndex === 0;
     const newIndex = isFirstSlide ? slides.length - 1 : currentIndex - 1;
@@ -43,8 +43,8 @@ function Home() {
     <section>
       <div className="max-w-[1000px] h-[580px] w-full m-auto py-5 px-4 relative group">
         <h1 className="text-5xl md:text-4xl font-extrabold text-center text-gray-900 dark:text-BLACK mb-8 mt-5">
-  Welcome to 5-A-Side-API
-</h1>
+          Welcome to 5-A-Side-API
+        </h1>
         <div
           style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
           className="w-full h-full rounded-2xl bg-center bg-cover duration-500 "></div>
@@ -71,9 +71,7 @@ function Home() {
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2024.{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
-              
-            </a>
+            <a href="https://flowbite.com/" className="hover:underline"></a>
             All Rights Reserved.
           </span>
           <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">

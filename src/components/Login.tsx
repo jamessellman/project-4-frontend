@@ -8,12 +8,14 @@ export default function Login({ fetchUser }: { fetchUser: Function }) {
   // ! navigate is a function to call to take the user to another page.
   const navigate = useNavigate();
 
+  // usestate to set user input to variable.
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
 
+  // function to record input by user on login.
   function handleChange(e: any) {
     setErrorMessage("");
     const fieldName = e.target.name;
@@ -22,21 +24,17 @@ export default function Login({ fetchUser }: { fetchUser: Function }) {
     setFormData(newFormData);
   }
 
-  console.log(formData);
-
+// function to submit log in.
   async function handleSubmit(e: SyntheticEvent) {
-  try {
-e.preventDefault(); 
-    const resp = await axios.post(`${baseUrl}/login`, formData);
-    localStorage.setItem("token", resp.data.token);
-    console.log(resp.data);
-     fetchUser();
-    navigate("/");
-  } catch (e:any) {
-     console.log("there has been an error!", e.response.data.message);
+    try {
+      e.preventDefault();
+      const resp = await axios.post(`${baseUrl}/login`, formData);
+      localStorage.setItem("token", resp.data.token);
+      fetchUser();
+      navigate("/");
+    } catch (e: any) {
       setErrorMessage(e.response.data.message);
-  }
-    
+    }
   }
 
   return (
@@ -48,8 +46,7 @@ e.preventDefault();
             <label className="label mb-2 text-sm font-medium text-gray-900 dark:text-black">
               Email
             </label>
-            <div
-              className="control ">
+            <div className="control ">
               <input
                 className="input bg-transparent bg-gray-50 border border-gray-300 text-gray-900 
             text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full 
@@ -95,9 +92,7 @@ e.preventDefault();
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2024.{" "}
-            <a href="https://flowbite.com/" className="hover:underline">
-              
-            </a>
+            <a href="https://flowbite.com/" className="hover:underline"></a>
             All Rights Reserved.
           </span>
           <ul className="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">

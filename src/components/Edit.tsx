@@ -8,6 +8,7 @@ function EditFootballer() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  // Use states to set form data inputted by user
   const [formData, setFormData] = useState({
     name: "",
     position: "",
@@ -21,6 +22,7 @@ function EditFootballer() {
     image: "",
   });
 
+  // fetch data for the player already present in database by ID
 React.useEffect(() => {
     async function fetchPlayer() {
       const resp = await fetch(`${baseUrl}/players/${id}`);
@@ -30,7 +32,7 @@ React.useEffect(() => {
     fetchPlayer();
   }, []);
 
-
+// record text in type field
   function handleChange(e: any) {
     const fieldName = e.currentTarget.name;
     const newFormData: any = structuredClone(formData);
@@ -39,6 +41,7 @@ React.useEffect(() => {
     setFormData(newFormData);
   }
 
+  // function to handle edit player submission
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     const token = localStorage.getItem("token");
@@ -49,6 +52,7 @@ React.useEffect(() => {
   }
 
   return (
+    // form to edit a current player
     <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
       <div className="mb-5">
         <h1>Edit player</h1>

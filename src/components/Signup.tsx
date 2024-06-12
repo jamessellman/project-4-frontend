@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { baseUrl } from "../config";
 
 export default function Signup() {
+  
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     username: "",
@@ -26,6 +28,7 @@ export default function Signup() {
       password: "",
       confirmPassword: "",
     });
+    
     const fieldName = e.target.name;
     const newFormData = structuredClone(formData);
     newFormData[fieldName as keyof typeof formData] = e.target.value;
@@ -44,7 +47,6 @@ export default function Signup() {
     }
   }
 
-  console.log(formData);
   return (
     <div className="section">
       <div className="container mx-auto">
@@ -118,6 +120,7 @@ export default function Signup() {
           </button>
         </form>
       </div>
+      {/* footer */}
       <footer className=" fixed bottom-0 left-0 w-full bg-white shadow dark:bg-gray-800">
         <div className="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
